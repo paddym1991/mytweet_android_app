@@ -10,4 +10,9 @@
     <string name="loginEmail">Email</string>
     <string name="loginPassword">Password</string>
     <string name="signinButton">Sign in</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="signupEmail">Email</string>
+    <string name="signupPassword">Password</string>
+    <string name="registerButton">Register</string>
 </resources>
