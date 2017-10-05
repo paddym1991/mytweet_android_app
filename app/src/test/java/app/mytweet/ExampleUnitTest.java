@@ -1,4 +1,4 @@
-package org.pm.mytweet;
+package app.mytweet;
 
 import org.junit.Test;
 

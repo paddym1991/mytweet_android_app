@@ -1,7 +1,9 @@
-package org.pm.mytweet;
+package app.mytweet.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import org.pm.mytweet.R;
 
 public class MyTweetActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package org.pm.mytweet;
+package app.mytweet;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
