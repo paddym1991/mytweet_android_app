@@ -15,4 +15,8 @@
     <string name="signupEmail">Email</string>
     <string name="signupPassword">Password</string>
     <string name="registerButton">Register</string>
+    <string name="welcomeTitle">Welcome to MyTweet</string>
+    <string name="welcomeSubtitle">See whats happening in the great WIT world right now</string>
+    <string name="signupButton">Sign up</string>
+    <string name="loginButton">Login</string>
 </resources>
