@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyTweet</string>
+    <string name="tweetButton">Tweet</string>
+    <string name="charCounter">140</string>
+    <string name="selectContactButton">Select Contact</string>
+    <string name="emailTweetButton">Email Tweet Via</string>
 </resources>
