@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="app.mytweet.activities.MyTweetActivity" />
+        <activity android:name="app.mytweet.activities.TweetActivity" />
         <activity android:name="app.mytweet.activities.Login" />
         <activity android:name="app.mytweet.activities.Signup" />
     </application>
