@@ -8,11 +8,11 @@ import org.pm.mytweet.R;
 
 import java.util.ArrayList;
 
-public class Timeline {
+public class Portfolio {
 
     public ArrayList<Tweet> tweets;
 
-    public Timeline() {
+    public Portfolio() {
         tweets = new ArrayList<>();
     }
 
