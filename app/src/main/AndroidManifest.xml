@@ -24,6 +24,7 @@
         <activity android:name="app.mytweet.activities.TweetActivity" />
         <activity android:name="app.mytweet.activities.Login" />
         <activity android:name="app.mytweet.activities.Signup" />
+        <activity android:name="app.mytweet.models.Timeline"></activity>
     </application>
 
 </manifest>
