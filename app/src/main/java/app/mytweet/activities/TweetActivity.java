@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.EditText;
 
 import org.pm.mytweet.R;
 
@@ -12,13 +13,18 @@ import app.mytweet.models.Tweet;
 public class TweetActivity extends AppCompatActivity implements TextWatcher {
 
     private Tweet tweet;
+    private EditText tweetText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet);
 
+        tweetText = (EditText) findViewById(R.id.tweetText);
         tweet = new Tweet();
+
+        // Register a TextWatcher in the EditText tweetText object
+        tweetText.addTextChangedListener(this);
     }
 
     @Override

@@ -11,6 +11,7 @@ public class Tweet {
 
     public Long id;
     public Long date;
+    public String tweetText;
 
 
     public Tweet() {
@@ -28,6 +29,14 @@ public class Tweet {
             rndVal = new Random().nextLong();
         } while (rndVal <= 0);
         return rndVal;
+    }
+
+    public void setTweetText(String tweetText) {
+        this.tweetText = tweetText;
+    }
+
+    public String getTweetText() {
+        return tweetText;
     }
 
     public String dateString() {
