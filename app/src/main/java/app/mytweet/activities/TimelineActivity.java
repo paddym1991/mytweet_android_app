@@ -1,6 +1,8 @@
 package app.mytweet.activities;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,8 +26,7 @@ import app.mytweet.models.Tweet;
 /**
  * Created by Paddym1991 on 09/10/2017.
  */
-
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
     private Portfolio portfolio;
@@ -45,6 +47,18 @@ public class TimelineActivity extends AppCompatActivity {
         //in order to trigger TweetAdapter
         adapter = new TweetAdapter(this, portfolio.tweets);
         listView.setAdapter(adapter);
+
+        //install the ResidenceListActivity as a Listener
+        listView.setOnItemClickListener(this);
+    }
+
+    //interface method
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        //On click: intent is to go to this TweetActivity
+        Intent intent = new Intent(this, TweetActivity.class);
+        startActivity(intent);
     }
 }
 
