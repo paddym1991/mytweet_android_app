@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import org.pm.mytweet.R;
 
+import app.mytweet.app.MyTweetApp;
+import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
 
 public class TweetActivity extends AppCompatActivity implements TextWatcher {
@@ -20,8 +22,8 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher {
     private Tweet tweet;
     private EditText tweetText;
     private TextView tweetDate;
+    private Portfolio portfolio;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,28 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher {
 //        String dateString = sdf.format(tdate);
 //        tweetDate.setText(dateString);
 
+        //initialising the portfolio field
+        MyTweetApp app = (MyTweetApp) getApplication();
+        portfolio = app.portfolio;
 
+        //Recover the ID passed to us via the intent in TimelineActivity
+        Long tweetId = (Long) getIntent().getExtras().getSerializable("TWEET_ID");
+        //get the Tweet object from the portfolio
+        tweet = portfolio.getTweet(tweetId);
+
+        //call update controls if we are sure we found a reference
+        if(tweet != null) {
+            updateControls(tweet);
+        }
+    }
+
+    /**
+     * Send the tweet data to the widgets.
+     * @param tweet
+     */
+    public void updateControls(Tweet tweet) {
+        tweetText.setText(tweet.tweetText);
+        tweetDate.setText(tweet.getDateString());
     }
 
     @Override

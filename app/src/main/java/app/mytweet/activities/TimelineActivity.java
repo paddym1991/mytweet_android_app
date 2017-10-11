@@ -23,6 +23,8 @@ import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
 
+import static org.pm.mytweet.R.id.tweetDate;
+
 /**
  * Created by Paddym1991 on 09/10/2017.
  */
@@ -56,8 +58,12 @@ public class TimelineActivity extends Activity implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        Tweet tweet = adapter.getItem(position);
         //On click: intent is to go to this TweetActivity
         Intent intent = new Intent(this, TweetActivity.class);
+        //tweet.id represents the tweet the user clicked on(by position)
+        //This is obtained from the portfolio and then pssed to the intent as an extra data item
+        intent.putExtra("TWEET_ID", tweet.id);
         startActivity(intent);
     }
 }
@@ -88,8 +94,8 @@ class TweetAdapter extends ArrayAdapter<Tweet> {
         TextView tweetText = (TextView) convertView.findViewById(R.id.timeline_item_tweetText);
         tweetText.setText(tweet.tweetText);
 
-//        TextView dateTextView = (TextView) convertView.findViewById(R.id.timeline_item_tweetDate);
-//        tweetDate.setText(tweet.getDateString());
+        TextView tweetDate = (TextView) convertView.findViewById(R.id.timeline_item_tweetDate);
+        tweetDate.setText(tweet.getDateString());
 
         return convertView;
     }
