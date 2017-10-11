@@ -1,6 +1,7 @@
 package app.mytweet.app;
 
 import android.app.Application;
+import static app.helpers.LogHelpers.info;
 
 import app.mytweet.models.Portfolio;
 
@@ -16,5 +17,7 @@ public class MyTweetApp extends Application {
     public void onCreate() {
         super.onCreate();
         portfolio = new Portfolio();
+
+        info(this, "MyTweet app launched");
     }
 }
