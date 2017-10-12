@@ -8,6 +8,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +30,7 @@ import static org.pm.mytweet.R.id.tweetDate;
 /**
  * Created by Paddym1991 on 09/10/2017.
  */
-public class TimelineActivity extends Activity implements AdapterView.OnItemClickListener {
+public class TimelineActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {        //changed extends Activity to extends AppCompatActivity. Wouldn't work otherwise
 
     private ListView listView;
     private Portfolio portfolio;
@@ -65,6 +67,19 @@ public class TimelineActivity extends Activity implements AdapterView.OnItemClic
         //This is obtained from the portfolio and then pssed to the intent as an extra data item
         intent.putExtra("TWEET_ID", tweet.id);
         startActivity(intent);
+    }
+
+    /**
+     * Bind the newly created menu to the timeline activity as we wish it to appear here
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.timeline, menu);
+        return true;
     }
 }
 

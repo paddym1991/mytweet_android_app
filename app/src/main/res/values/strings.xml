@@ -20,4 +20,6 @@
     <string name="signupButton">Sign up</string>
     <string name="loginButton">Login</string>
     <string name="tweetText_hint">Whats on your mind?</string>
+    <string name="new_tweet">New Tweet</string>
+    <string name="settings">Settings</string>
 </resources>
