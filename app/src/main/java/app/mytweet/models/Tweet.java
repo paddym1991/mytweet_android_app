@@ -17,6 +17,7 @@ public class Tweet {
     public Tweet() {
         id = unsignedLong();
         date = new Date().getTime();
+        //tweetText = "";
     }
 
     /**

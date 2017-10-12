@@ -14,7 +14,8 @@ public class Portfolio {
 
     public Portfolio() {
         tweets = new ArrayList<>();
-        this.generateTestData();
+        //removed test data (below) as its no longer needed due to introducing add tweet ability
+        //this.generateTestData();
     }
 
     public void addTweet(Tweet tweet) {
@@ -32,14 +33,14 @@ public class Portfolio {
         return null;
     }
 
-    private void generateTestData() {
-
-        for (int i = 0; i < 5; i += 1) {
-            Tweet t = new Tweet();
-            t.tweetText = "Dummy Tweet";
-            tweets.add(t);
-        }
-    }
+//    private void generateTestData() {
+//
+//        for (int i = 0; i < 5; i += 1) {
+//            Tweet t = new Tweet();
+//            t.tweetText = "Dummy Tweet";
+//            tweets.add(t);
+//        }
+//    }
 }
 
 

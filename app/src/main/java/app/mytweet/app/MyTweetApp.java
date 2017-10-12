@@ -1,7 +1,7 @@
 package app.mytweet.app;
 
 import android.app.Application;
-import static app.helpers.LogHelpers.info;
+import static app.helpers.LogHelper.info;
 
 import app.mytweet.models.Portfolio;
 

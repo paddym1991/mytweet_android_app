@@ -27,6 +27,11 @@ import app.mytweet.models.Tweet;
 
 import static org.pm.mytweet.R.id.tweetDate;
 
+//importing the intent helpers and menu item
+import static app.helpers.IntentHelper.startActivityWithData;
+import static app.helpers.IntentHelper.startActivityWithDataForResult;
+import android.view.MenuItem;
+
 /**
  * Created by Paddym1991 on 09/10/2017.
  */
@@ -61,12 +66,7 @@ public class TimelineActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         Tweet tweet = adapter.getItem(position);
-        //On click: intent is to go to this TweetActivity
-        Intent intent = new Intent(this, TweetActivity.class);
-        //tweet.id represents the tweet the user clicked on(by position)
-        //This is obtained from the portfolio and then pssed to the intent as an extra data item
-        intent.putExtra("TWEET_ID", tweet.id);
-        startActivity(intent);
+        startActivityWithData(this, TweetActivity.class, "TWEET_ID", tweet.id);     //replace 3 lines with this shortened line of code
     }
 
     /**
@@ -80,6 +80,32 @@ public class TimelineActivity extends AppCompatActivity implements AdapterView.O
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.timeline, menu);
         return true;
+    }
+
+    /**
+     * Respond to selecting the menu item to create a new tweet instance
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.menu_item_new_tweet: Tweet tweet = new Tweet();
+                portfolio.addTweet(tweet);
+                startActivityWithDataForResult(this, TweetActivity.class, "TWEET_ID", tweet.id, 0);
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //Ensure changes made in TimelineActivity are reflected in the list
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }
 

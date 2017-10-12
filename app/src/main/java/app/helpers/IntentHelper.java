@@ -4,7 +4,7 @@ import java.io.Serializable;
 import android.app.Activity;
 import android.content.Intent;
 
-public class IntentHelpers
+public class IntentHelper
 {
     public static void startActivity (Activity parent, Class classname)
     {
