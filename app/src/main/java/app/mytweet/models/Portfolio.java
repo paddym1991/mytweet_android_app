@@ -8,16 +8,38 @@ import org.pm.mytweet.R;
 
 import java.util.ArrayList;
 
+import static app.helpers.LogHelper.info;
+
 public class Portfolio {
 
     public ArrayList<Tweet> tweets;
+    //introduce the serializer as a member of the Portfolio class
+    private PortfolioSerializer serializer;
 
-    public Portfolio() {
-        tweets = new ArrayList<>();
-        //removed test data (below) as its no longer needed due to introducing add tweet ability
-        this.generateTestData();
+
+    /**
+     * Revise the constructor to take a serializer when it is being initialised
+     * @param serializer
+     */
+    public Portfolio(PortfolioSerializer serializer)
+    {
+        this.serializer = serializer;
+        try
+        {
+            tweets = serializer.loadTweets();
+        }
+        catch (Exception e)
+        {
+            info(this, "Error loading tweets: " + e.getMessage());
+            tweets = new ArrayList<Tweet>();
+            this.generateTestData();
+        }
     }
 
+    /**
+     * Method to add a tweet to the list
+     * @param tweet
+     */
     public void addTweet(Tweet tweet) {
         tweets.add(tweet);
     }
@@ -31,6 +53,25 @@ public class Portfolio {
             }
         }
         return null;
+    }
+
+    /**
+     * Introduce a new method to save all the tweets to disk
+     * @return
+     */
+    public boolean saveTweets()
+    {
+        try
+        {
+            serializer.saveTweets(tweets);
+            info(this, "Tweets saved to file");
+            return true;
+        }
+        catch (Exception e)
+        {
+            info(this, "Error saving tweets: " + e.getMessage());
+            return false;
+        }
     }
 
     private void generateTestData() {
