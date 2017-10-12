@@ -78,6 +78,17 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher {
     //set tweetText of Tweet object to text entered.
     @Override
     public void afterTextChanged(Editable editable) {
+
         tweet.setTweetText(editable.toString());
+    }
+
+    /**
+     * Trigger a save when the user leaves the TweetActivity
+     */
+    @Override
+    public void onPause() {
+
+        super.onPause();
+        portfolio.saveTweets();
     }
 }
