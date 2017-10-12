@@ -32,7 +32,7 @@ public class Portfolio {
         {
             info(this, "Error loading tweets: " + e.getMessage());
             tweets = new ArrayList<Tweet>();
-            this.generateTestData();
+            //this.generateTestData();
         }
     }
 
@@ -74,14 +74,14 @@ public class Portfolio {
         }
     }
 
-    private void generateTestData() {
-
-        for (int i = 0; i < 5; i += 1) {
-            Tweet t = new Tweet();
-            t.tweetText = "Dummy Tweet";
-            tweets.add(t);
-        }
-    }
+//    private void generateTestData() {
+//
+//        for (int i = 0; i < 5; i += 1) {
+//            Tweet t = new Tweet();
+//            t.tweetText = "Dummy Tweet";
+//            tweets.add(t);
+//        }
+//    }
 }
 
 
