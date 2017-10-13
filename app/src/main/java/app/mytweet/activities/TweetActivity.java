@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +17,9 @@ import org.pm.mytweet.R;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
+
+//importing the helper method for 'up' style navigation
+import static app.helpers.IntentHelper.navigateUp;
 
 public class TweetActivity extends AppCompatActivity implements TextWatcher {
 
@@ -28,6 +32,8 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweet);
+        //for navigation purposes
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tweetText = (EditText) findViewById(R.id.tweetText);
         tweet = new Tweet();
@@ -90,5 +96,17 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher {
 
         super.onPause();
         portfolio.saveTweets();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:  navigateUp(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
