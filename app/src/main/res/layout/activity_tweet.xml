@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.pm.mytweet.app.mytweet.MyTweetActivity">
+    tools:context="app.mytweet.TweetActivity">
 
     <TextView
         android:id="@+id/charCounter"

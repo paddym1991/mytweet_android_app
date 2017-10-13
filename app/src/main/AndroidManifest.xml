@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--permission to access details in a contact-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name="app.mytweet.app.MyTweetApp"
