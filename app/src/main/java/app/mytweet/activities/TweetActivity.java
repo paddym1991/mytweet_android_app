@@ -28,6 +28,9 @@ import static app.helpers.IntentHelper.navigateUp;
 import static app.helpers.IntentHelper.selectContact;
 import android.content.Intent;
 
+//import helper for sending an email
+import static app.helpers.ContactHelper.sendEmail;
+
 public class TweetActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
 
     private Tweet tweet;
@@ -39,6 +42,8 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher, Vie
     //button to trigger the intent
     private Button selectContactButton;
     private String emailAddress = "";
+    //buttom to trigger email intent
+    private Button   emailTweetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +76,12 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher, Vie
         //initialisation of selectContactButton
         selectContactButton = (Button)   findViewById(R.id.selectContact);      //'selectContact' is ID of the button in activity_tweet
         //event handler set up for selectContactButton
-        selectContactButton.setOnClickListener((View.OnClickListener) this);
+        selectContactButton.setOnClickListener(this);
+
+        //initialisation of the emailTweetButton
+        emailTweetButton = (Button)   findViewById(R.id.emailTweet);        //emailTweet is ID of the button in activity_tweet
+        //Enabling the event handler for emailTweetButton
+        emailTweetButton.setOnClickListener(this);
     }
 
     /**
@@ -110,7 +120,13 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher, Vie
     {
         switch (view.getId())
         {
+            //event handler for select contact button
             case R.id.selectContact : selectContact(this, REQUEST_CONTACT);
+                break;
+            //event handler for email tweet button
+            case R.id.emailTweet :
+                sendEmail(this, emailAddress,
+                        getString(R.string.tweet_email_subject), tweet.getTweetEmail(this));        //tweet_email_subject found in 'strings'
                 break;
         }
     }
