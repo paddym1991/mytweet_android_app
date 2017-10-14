@@ -1,10 +1,14 @@
 package app.mytweet.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,8 +46,11 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher, Vie
     //button to trigger the intent
     private Button selectContactButton;
     private String emailAddress = "";
-    //buttom to trigger email intent
+    //button to trigger email intent
     private Button   emailTweetButton;
+    // New field for intent data. This field is initialized in `onActivityResult`.
+    // This field is required to provide us with access to the data intent outside the method onActivityResult
+    private Intent data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,16 +167,69 @@ public class TweetActivity extends AppCompatActivity implements TextWatcher, Vie
      * @param data
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        switch (requestCode)
-        {
+    //refactored method. reading of contact details farmed out to seperate method (readContact()) below
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
             case REQUEST_CONTACT:
-                String name = getContact(this, data);
-                emailAddress = getEmail(this, data);
-                selectContactButton.setText(name + " : " + emailAddress);
-                tweet.contact = name;
+                this.data = data;
+                checkContactsReadPermission();
                 break;
+        }
+    }
+
+    /**
+     * As we will be adding permission checks prior to reading the contact details,
+     * we will farm the reading of the contact details into this new private method
+     */
+    private void readContact() {
+        String name = getContact(this, data);
+        emailAddress = getEmail(this, data);
+        selectContactButton.setText(name + " : " + emailAddress);
+        tweet.contact = name;
+    }
+
+    //https://developer.android.com/training/permissions/requesting.html
+
+    /**
+     *  This method will check if the app has permission to read the contact details.
+     *  If it does have permission, the readContact() method will be called.
+     *  If it doesn't, it will request the permission via a pop-up dialog box. The user can choose to Allow or Deny access.
+     */
+    private void checkContactsReadPermission() {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            //We can request the permission.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CONTACT);
+        }
+        else {
+            //We already have permission, so go ahead and read the contact
+            readContact();
+        }
+    }
+
+    //https://developer.android.com/training/permissions/requesting.html
+
+    /**
+     * When the user responds to the dialog box (allow or deny), the system invokes the app's onRequestPermissionsResult() method,
+     * passing in the user response.
+     * Note that, if permission is granted, the readContact method is called, otherwise it is ignored.
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CONTACT: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted
+                    readContact();
+                }
+            }
         }
     }
 }
