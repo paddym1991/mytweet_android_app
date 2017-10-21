@@ -37,7 +37,7 @@ public class Tweet {
         //tweetText = "";
 
         //initialize contact in the default constructor with string literal to avoid a future null pointer exception error
-        contact = ": no contact yet";
+        contact = " no contact yet";
     }
 
     /**

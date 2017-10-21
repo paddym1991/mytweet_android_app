@@ -15,6 +15,8 @@ public class MyTweetApp extends Application {
     public Portfolio portfolio;
     //introduce a field to hold the file name we will use to store the portfolio
     private static final String FILENAME = "portfolio.json";
+    //declare a protected MyTweetApp field
+    protected static MyTweetApp app;
 
     @Override
     public void onCreate() {
@@ -24,5 +26,13 @@ public class MyTweetApp extends Application {
         portfolio = new Portfolio(serializer);
 
         info(this, "MyTweet app launched");
+        //initialize protected MyRentApp field in onCreate
+        app = this;
+
+
+    }
+
+    public static MyTweetApp getApp() {
+        return app;
     }
 }
