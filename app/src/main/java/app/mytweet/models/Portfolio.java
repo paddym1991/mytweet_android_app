@@ -74,6 +74,16 @@ public class Portfolio {
         }
     }
 
+    /**
+     * Method to delete tweet from list
+     * @param tweet
+     */
+    public void deleteTweet(Tweet tweet)
+    {
+        tweets.remove(tweet);
+        saveTweets();
+    }
+
 //    private void generateTestData() {
 //
 //        for (int i = 0; i < 5; i += 1) {
