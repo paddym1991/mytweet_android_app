@@ -25,4 +25,5 @@
     <string name="tweet_email_subject">My Latest Tweet!</string>
     <string name="timeline_label">Timeline</string>
     <string name="tweet_label">Tweet</string>
+    <string name="delete_tweet">Delete Tweet</string>
 </resources>

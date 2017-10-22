@@ -76,6 +76,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         setHasOptionsMenu(true);
 
         //Recover the ID passed to us via the intent in TimelineActivity
+        // Long tweetId = (Long) getActivity().getIntent().getSerializableExtra("EXTRA_TWEET_ID");
         Long tweetId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_TWEET_ID);
 
         app = MyTweetApp.getApp();
