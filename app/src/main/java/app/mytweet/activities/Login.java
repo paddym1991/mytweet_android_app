@@ -16,6 +16,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void signinButtonPressed (View view) {
-        startActivity(new Intent(this, TweetActivity.class));
+        startActivity(new Intent(this, TimelineActivity.class));
     }
 }

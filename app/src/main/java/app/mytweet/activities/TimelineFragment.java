@@ -51,7 +51,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
 
         super.onCreate(savedInstancesState);
         setHasOptionsMenu(true);
-        getActivity().setTitle(R.string.app_name);
+        getActivity().setTitle(R.string.timeline_label);
 
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;

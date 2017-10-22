@@ -19,25 +19,32 @@
 
         <activity
             android:name="app.mytweet.activities.TimelineActivity"
-            android:label="@string/app_name">
+            android:label="@string/timeline_label" />
+
+        <activity
+            android:name="app.mytweet.activities.TweetActivity"
+            android:label="@string/tweet_label" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.mytweet.activities.TimelineActivity"/>
+        </activity>
+
+        <activity
+            android:name="app.mytweet.activities.Login"
+            android:label="@string/login_label" >
+        </activity>
+
+        <activity
+            android:name="app.mytweet.activities.Signup"
+            android:label="@string/signup_label" >
+        </activity>
+
+        <activity
+            android:name="app.mytweet.activities.Welcome" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="app.mytweet.activities.TweetActivity"
-            android:label="@string/app_name" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value="app.mytweet.activities.TimelineActivity"/>
-        </activity>
-
-        <activity android:name="app.mytweet.activities.Login" />
-
-        <activity android:name="app.mytweet.activities.Signup" />
-
-        <activity android:name="app.mytweet.activities.Welcome" />
 
     </application>
 
