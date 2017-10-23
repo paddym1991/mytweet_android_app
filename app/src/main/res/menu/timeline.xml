@@ -9,11 +9,15 @@
         android:title="@string/new_tweet"
         app:showAsAction="ifRoom|withText"/>
 
-
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="@string/settings"/>
+
+    <item
+        android:id="@+id/menuLogout"
+        android:orderInCategory="100"
+        android:title="@string/menuLogout"/>
 
 </menu>

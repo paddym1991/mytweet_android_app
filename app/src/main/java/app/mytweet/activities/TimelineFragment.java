@@ -29,6 +29,7 @@ import app.mytweet.models.Tweet;
 
 import android.widget.AbsListView;
 import android.view.ActionMode;
+import android.widget.Toast;
 
 /**
  * Created by Paddym1991 on 18/10/2017.
@@ -102,6 +103,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
         inflater.inflate(R.menu.timeline, menu);
     }
 
+
     /**
      * Respond to selecting the menu item to create a new tweet instance
      *
@@ -120,6 +122,12 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
                 Intent i = new Intent(getActivity(), TweetActivity.class);
                 i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet.id);
                 startActivityForResult(i, 0);
+                return true;
+
+//            case R.id.action_settings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
+//                return true;
+
+            case R.id.menuLogout:   startActivity(new Intent(getActivity(), Welcome.class));
                 return true;
 
             default:

@@ -23,6 +23,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +45,7 @@ import static app.helpers.ContactHelper.getEmail;
 import static app.helpers.IntentHelper.navigateUp;
 import static app.helpers.IntentHelper.selectContact;
 import android.content.Intent;
+import android.widget.Toast;
 
 //import helper for sending an email
 import static app.helpers.ContactHelper.sendEmail;
@@ -177,6 +180,38 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     }
 
     /**
+     * Bind the newly created menu to the tweet activity as we wish it to appear here
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_tweet, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:  navigateUp(getActivity());
+                return true;
+
+//            case R.id.action_settings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
+//                return true;
+
+            case R.id.menuLogout:   startActivity(new Intent(getActivity(), Welcome.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    /**
      * Event handler
      * overides super class by this class implementing 'View.OnClickListener'
      * @param view
@@ -210,19 +245,6 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         portfolio.saveTweets();
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case android.R.id.home:  navigateUp(getActivity());
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     /**
      * To deal with selectContent method triggering a 'startActivityForResult'
