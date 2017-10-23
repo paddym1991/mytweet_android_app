@@ -14,7 +14,7 @@
     <EditTextPreference
         android:key="nmr_tweets"
         android:summary="@string/nmr_tweets_summary"
-        android:title="@string/nmr_tweetss"
+        android:title="@string/nmr_tweets"
         android:inputType="text"/>
 
     <EditTextPreference
