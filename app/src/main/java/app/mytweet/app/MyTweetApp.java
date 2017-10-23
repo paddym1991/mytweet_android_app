@@ -1,8 +1,13 @@
 package app.mytweet.app;
 
 import android.app.Application;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static app.helpers.LogHelper.info;
 
+import app.mytweet.models.User;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.PortfolioSerializer;
 
@@ -17,6 +22,8 @@ public class MyTweetApp extends Application {
     private static final String FILENAME = "portfolio.json";
     //declare a protected MyTweetApp field
     protected static MyTweetApp app;
+    //incorporate a new collection of Users
+    public List<User> users = new ArrayList<User>();
 
     @Override
     public void onCreate() {
@@ -33,6 +40,17 @@ public class MyTweetApp extends Application {
     }
 
     public static MyTweetApp getApp() {
+
         return app;
     }
+
+    /**
+     * Method to add a user to the collection
+     * @param user
+     */
+    public void newUser(User user) {
+
+        users.add(user);
+    }
+
 }
