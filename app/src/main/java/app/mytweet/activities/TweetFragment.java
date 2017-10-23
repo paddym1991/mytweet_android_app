@@ -280,7 +280,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         String name = getContact(getActivity(), data);
         emailAddress = getEmail(getActivity(), data);
         tweet.contact = name;
-        selectContactButton.setText("Contact: " + tweet.contact);
+        selectContactButton.setText(name + ": " + emailAddress);
     }
 
 
