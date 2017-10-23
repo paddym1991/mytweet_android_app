@@ -4,8 +4,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.view.MenuItem;
 
 import org.pm.mytweet.R;
+
+import static app.helpers.IntentHelper.navigateUp;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -15,6 +18,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+
+        //enable the up button
+        setHasOptionsMenu(true);
     }
 
     /**
@@ -50,5 +56,23 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     {
         super.onStop();
         prefs.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    /**
+     * Menu handler for the 'up' button
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                navigateUp(getActivity());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
