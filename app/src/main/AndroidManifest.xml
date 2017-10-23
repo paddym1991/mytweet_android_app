@@ -46,6 +46,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="app.mytweet.settings.SettingsActivity"
+            android:label="@string/settings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.mytweet.activities.TimelineActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

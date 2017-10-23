@@ -26,6 +26,7 @@ import app.helpers.IntentHelper;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
+import app.mytweet.settings.SettingsActivity;
 
 import android.widget.AbsListView;
 import android.view.ActionMode;
@@ -124,8 +125,9 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
                 startActivityForResult(i, 0);
                 return true;
 
-//            case R.id.action_settings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
-//                return true;
+            case R.id.action_settings:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
 
             case R.id.menuLogout:   Intent in = new Intent(getActivity(), Welcome.class);
                 //Prevents user from pressing back after logging out.
