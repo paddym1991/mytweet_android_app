@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import org.pm.mytweet.R;
 
 import static app.helpers.IntentHelper.navigateUp;
+import static app.helpers.LogHelper.info;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -46,6 +47,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
+        //log to console when change made to settings
+        info(getActivity(), "Setting change - key : value = " + key + " : " + sharedPreferences.getString(key, ""));
     }
 
     /**
