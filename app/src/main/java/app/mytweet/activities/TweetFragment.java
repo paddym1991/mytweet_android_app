@@ -202,7 +202,10 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
 //            case R.id.action_settings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
 //                return true;
 
-            case R.id.menuLogout:   startActivity(new Intent(getActivity(), Welcome.class));
+            case R.id.menuLogout:   Intent in = new Intent(getActivity(), Welcome.class);
+                //Prevents user from pressing back after logging out.
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivityForResult(in, 0);
                 return true;
 
             default:
