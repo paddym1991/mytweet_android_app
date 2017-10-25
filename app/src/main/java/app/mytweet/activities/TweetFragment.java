@@ -102,6 +102,11 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         return v;
     }
 
+    /**
+     * 1. Bind listener to widgets
+     * 2. Set specific listener to each widget
+     * @param v
+     */
     private void addListeners(View v)
     {
         tweetText = (EditText) v.findViewById(R.id.tweetText);
@@ -110,46 +115,11 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         selectContactButton = (Button)   v.findViewById(R.id.selectContact);
 
         tweetText.addTextChangedListener(this);
-        tweetDate.addTextChangedListener(this);
+        //tweetDate.addTextChangedListener(this);       //tweet Date does not change after intitially being set, so no need for a listener
         emailTweetButton.setOnClickListener(this);
         selectContactButton.setOnClickListener(this);
     }
 
-//        setContentView(R.layout.fragment_tweet);
-//        for navigation purposes
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        tweetText = (EditText) findViewById(R.id.tweetText);
-//        tweet = new Tweet();
-//        tweetDate = (TextView) findViewById(R.id.tweetDate);
-//
-//        // Register a TextWatcher in the EditText tweetText object
-//        tweetText.addTextChangedListener(this);
-//
-//        //initialising the portfolio field
-//        MyTweetApp app = (MyTweetApp) getApplication();
-//        portfolio = app.portfolio;
-//
-//        //Recover the ID passed to us via the intent in TimelineActivity
-//        Long tweetId = (Long) getIntent().getExtras().getSerializable("TWEET_ID");
-//        //get the Tweet object from the portfolio
-//        tweet = portfolio.getTweet(tweetId);
-//
-//        //call update controls if we are sure we found a reference
-//        if(tweet != null) {
-//            updateControls(tweet);
-//        }
-//
-//        //initialisation of selectContactButton
-//        selectContactButton = (Button)   findViewById(R.id.selectContact);      //'selectContact' is ID of the button in fragment_tweet
-//        //event handler set up for selectContactButton
-//        selectContactButton.setOnClickListener(this);
-//
-//        //initialisation of the emailTweetButton
-//        emailTweetButton = (Button)   findViewById(R.id.emailTweet);        //emailTweet is ID of the button in fragment_tweet
-//        //Enabling the event handler for emailTweetButton
-//        emailTweetButton.setOnClickListener(this);
-//    }
 
     /**
      * Send the tweet data to the widgets.
@@ -174,7 +144,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     @Override
     public void afterTextChanged(Editable editable) {
 
-        Log.i(this.getClass().getSimpleName(), "tweetText " + editable.toString());
+        //log to keep track of tweetText being changed
+        Log.i("twitter", "tweetText " + editable.toString());
         tweet.tweetText = editable.toString();
         //tweet.setTweetText(editable.toString());
     }
@@ -224,6 +195,10 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     {
         switch (view.getId())
         {
+//            case R.id.tweetButton:
+//                Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
+//                break;
+
             //event handler for select contact button
             case R.id.selectContact :
                 Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -246,6 +221,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
 
         super.onPause();
         portfolio.saveTweets();
+        //Long tweetId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_TWEET_ID);
     }
 
 
@@ -256,7 +232,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
      * @param data
      */
     @Override
-    //refactored method. reading of contact details farmed out to seperate method (readContact()) below
+    //refactored method. reading of contact details farmed out to separate method (readContact()) below
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(resultCode != Activity.RESULT_OK)

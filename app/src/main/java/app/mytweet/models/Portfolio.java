@@ -32,7 +32,6 @@ public class Portfolio {
         {
             info(this, "Error loading tweets: " + e.getMessage());
             tweets = new ArrayList<Tweet>();
-            //this.generateTestData();
         }
     }
 
