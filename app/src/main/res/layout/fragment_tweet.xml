@@ -38,7 +38,7 @@
         android:layout_height="242dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="23dp"
         android:background="@color/ivory"
         android:gravity="top"
         android:ems="10"
@@ -47,7 +47,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tweetButton"
-        app:layout_constraintHorizontal_bias="0.476" />
+        app:layout_constraintHorizontal_bias="0.483" />
 
     <TextView
         android:id="@+id/tweetDate"
