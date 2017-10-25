@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -172,8 +173,23 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     {
         switch (item.getItemId())
         {
-            case android.R.id.home:  navigateUp(getActivity());
+            case android.R.id.home:
+                //if textView contains text then navigateUp to parent(timeline), saving tweet to array.
+            if (tweetText.getText().length() > 0) {
+                tweet.tweetText = tweetText.getText().toString();
+
+                navigateUp(getActivity());
+                portfolio.saveTweets();
                 return true;
+
+            } else {
+                //else if textView is empty then delete this created tweet and navigate to timeline. No new tweet will be visible in timeline.
+                portfolio.deleteTweet(tweet);
+
+                startActivity(new Intent(getActivity(), TimelineActivity.class));
+                createToastMessage("No message entered!").show();
+                return true;
+            }
 
 //            case R.id.action_settings: Toast.makeText(this, "Settings Selected", Toast.LENGTH_SHORT).show();
 //                return true;
@@ -233,7 +249,9 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     public void onPause() {
 
         super.onPause();
-        portfolio.saveTweets();
+        //portfolio.saveTweets();           //not using portfolio.saveTweets() anymore as I've implemented it in the 'onOptionsItemSelected' & 'inClick' methods
+                                            //This was the reason that a blank tweet was added and saved to the timeline when back button was pressed.
+
         //Long tweetId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_TWEET_ID);
     }
 
