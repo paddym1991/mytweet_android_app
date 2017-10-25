@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import org.pm.mytweet.R;
 
+import app.helpers.IntentHelper;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
@@ -61,6 +62,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
 
     private EditText tweetText;
     private TextView tweetDate;
+    //button to post tweet
+    private Button tweetButton;
     //button to trigger the intent
     private Button selectContactButton;
     //button to trigger email intent
@@ -113,11 +116,13 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         tweetDate = (TextView) v.findViewById(R.id.tweetDate);
         emailTweetButton = (Button)   v.findViewById(R.id.emailTweet);
         selectContactButton = (Button)   v.findViewById(R.id.selectContact);
+        tweetButton = (Button) v.findViewById(R.id.tweetButton);
 
         tweetText.addTextChangedListener(this);
         //tweetDate.addTextChangedListener(this);       //tweet Date does not change after intitially being set, so no need for a listener
         emailTweetButton.setOnClickListener(this);
         selectContactButton.setOnClickListener(this);
+        tweetButton.setOnClickListener(this);
     }
 
 
@@ -195,9 +200,17 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     {
         switch (view.getId())
         {
-//            case R.id.tweetButton:
-//                Toast.makeText(getActivity(), "Message Sent", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.tweetButton:
+                if (tweetText.getText().length() > 0) {
+                    tweet.tweetText = tweetText.getText().toString();
+                    IntentHelper.startActivity(getActivity(), TimelineActivity.class);
+                    portfolio.saveTweets();
+
+                    break;
+                } else {
+                    createToastMessage("No message entered!").show();
+                    break;
+                }
 
             //event handler for select contact button
             case R.id.selectContact :
@@ -303,5 +316,10 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 }
             }
         }
+    }
+
+    // created a helper method for Toast response
+    private Toast createToastMessage(String string) {
+        return Toast.makeText(app.getApplicationContext(), string, Toast.LENGTH_SHORT);
     }
 }
