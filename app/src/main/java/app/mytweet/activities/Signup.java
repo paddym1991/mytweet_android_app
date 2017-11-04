@@ -32,13 +32,17 @@ public class Signup extends AppCompatActivity {
         TextView email     = (TextView)  findViewById(R.id.signupEmail);
         TextView password  = (TextView)  findViewById(R.id.signupPassword);
 
-        User user = new User (firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
-
         MyTweetApp app = MyTweetApp.getApp();
+
+        User user = new User (firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
         app.userStore.addUser(user);
         //app.newUser(user);
 
         startActivity (new Intent(this, Welcome.class));
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 }

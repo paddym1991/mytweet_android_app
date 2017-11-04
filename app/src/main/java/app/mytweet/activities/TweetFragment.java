@@ -188,7 +188,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 tweet.tweetText = tweetText.getText().toString();
 
                 navigateUp(getActivity());
-                portfolio.saveTweets();
+                portfolio.deleteTweet(tweet);
+                createToastMessage("No tweet saved").show();
                 return true;
 
             } else {
