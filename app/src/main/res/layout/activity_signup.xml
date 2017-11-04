@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/signupPassword"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupEmail" />
 

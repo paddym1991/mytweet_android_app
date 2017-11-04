@@ -235,7 +235,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
 
             TextView tweetText = (TextView) convertView.findViewById(R.id.timeline_item_tweetText);
             //assert tweet != null;
-            tweetText.setText(tweet.tweetText);
+            tweetText.setText(tweet.getTweetText());
 
             TextView tweetDate = (TextView) convertView.findViewById(R.id.timeline_item_tweetDate);
             tweetDate.setText(tweet.getDateString());
