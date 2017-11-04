@@ -1,32 +1,155 @@
 package app.mytweet.activities;
 
-import org.pm.mytweet.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-public class TweetActivity extends AppCompatActivity
-{
-    ActionBar actionBar;
+import org.pm.mytweet.R;
 
+import java.util.ArrayList;
+
+import app.mytweet.app.MyTweetApp;
+import app.mytweet.models.Portfolio;
+import app.mytweet.models.Tweet;
+
+import static app.helpers.LogHelper.info;
+
+public class TweetPagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener
+{
+    private ViewPager viewPager;
+
+    //Introduce instance variables for the list of tweets and for a portfolio
+    private ArrayList<Tweet> tweets;
+    private Portfolio portfolio;
+
+    //Declare a PageAdapter instance variable
+    private PagerAdapter pagerAdapter;
+
+
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_container);
 
-        actionBar = getSupportActionBar();
+        //This creates a view programatically (i.e. select create field to resolve the error)
+        viewPager = new ViewPager(this);
+        viewPager.setId(R.id.viewPager);
+        setContentView(viewPager);
 
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
-        if (fragment == null)
+        setTimeline();
+
+        //Instantiate the pageAdapter
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tweets);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(this);
+        setCurrentItem();
+    }
+
+    //obtain a reference to the list of tweets stored in the model layer
+    private void setTimeline()
+    {
+        MyTweetApp app = MyTweetApp.getApp();
+        portfolio = app.portfolio;
+        tweets = portfolio.tweets;
+    }
+
+    /*
+ * Ensure selected residence is shown in details view
+ */
+    private void setCurrentItem() {
+        Long tweetId = (Long) getIntent().getSerializableExtra(TweetFragment.EXTRA_TWEET_ID);
+        for (int i = 0; i < tweets.size(); i++) {
+            if (tweets.get(i).id.equals(tweetId)) {
+                viewPager.setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        info(this, "onPageScrolled: position " + position + " arg1 " + positionOffset + " positionOffsetPixels " + positionOffsetPixels);
+        Tweet tweet = tweets.get(position);
+        if (tweet.tweetText != null) {
+            setTitle(tweet.tweetText);
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    class PagerAdapter extends FragmentStatePagerAdapter
+    {
+        private ArrayList<Tweet>  tweets;
+
+        public PagerAdapter(FragmentManager fm, ArrayList<Tweet> tweets)
         {
-            fragment = new TweetFragment();
-            manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+            super(fm);
+            this.tweets = tweets;
+        }
+
+        @Override
+        public int getCount()
+        {
+            return tweets.size();
+        }
+
+        @Override
+        public Fragment getItem(int pos)
+        {
+            Tweet tweet = tweets.get(pos);
+            Bundle args = new Bundle();
+            args.putSerializable(TweetFragment.EXTRA_TWEET_ID, tweet.id);
+            TweetFragment fragment = new TweetFragment();
+            fragment.setArguments(args);
+            return fragment;
         }
     }
 }
+
+
+
+
+//package app.mytweet.activities;
+//
+//import org.pm.mytweet.R;
+//import android.os.Bundle;
+//import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v7.app.ActionBar;
+//import android.support.v7.app.AppCompatActivity;
+//
+//public class TweetActivity extends AppCompatActivity
+//{
+//    ActionBar actionBar;
+//
+//    public void onCreate(Bundle savedInstanceState)
+//    {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_container);
+//
+//        actionBar = getSupportActionBar();
+//
+//        FragmentManager manager = getSupportFragmentManager();
+//        Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
+//        if (fragment == null)
+//        {
+//            fragment = new TweetFragment();
+//            manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+//        }
+//    }
+//}
 
 
 
