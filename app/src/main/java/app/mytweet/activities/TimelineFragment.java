@@ -117,7 +117,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
         switch (item.getItemId()) {
 
             case R.id.menu_item_new_tweet:
-                Tweet tweet = new Tweet();
+                Tweet tweet = new Tweet(app.loggedInUser.id);
                 portfolio.addTweet(tweet);
 
                 Intent i = new Intent(getActivity(), TweetActivity.class);

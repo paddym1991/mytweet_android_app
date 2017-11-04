@@ -24,13 +24,15 @@ public class Login extends AppCompatActivity {
      * @param view
      */
     public void signinButtonPressed (View view) {
-        MyTweetApp app = (MyTweetApp) getApplication();
+        MyTweetApp app = MyTweetApp.getApp();
 
         TextView email = (TextView) findViewById(R.id.loginEmail);
         TextView password = (TextView) findViewById(R.id.loginPassword);
 
         String loggedInEmail = email.getText().toString();
-        if (app.validUser(email.getText().toString(), password.getText().toString())) {
+        String loggedInPassword = password.getText().toString();
+
+        if (app.validUser(loggedInEmail, loggedInPassword)) {
 
             //set logged in user when sign in is clicked
             app.setLoggedInUser(loggedInEmail);

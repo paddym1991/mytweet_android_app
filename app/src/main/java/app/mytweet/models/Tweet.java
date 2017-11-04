@@ -22,6 +22,7 @@ public class Tweet {
     public Long date;
     public String tweetText;
     public String contact;
+    private Long userId;
 
     //define in our classes appropriate names for each of the fields we wish to serialize
     private static final String JSON_ID         = "id"          ;
@@ -29,15 +30,17 @@ public class Tweet {
     private static final String JSON_DATE       = "date"        ;
     //added identifier to new 'contact' field to keep serialization on track
     private static final String JSON_CONTACT    = "contact"     ;
+    private static final String JSON_USER_ID    = "userId"      ;
 
 
-    public Tweet() {
+    public Tweet(Long userId) {
         id = unsignedLong();
         date = new Date().getTime();
         //tweetText = "";
 
         //initialize contact in the default constructor with string literal to avoid a future null pointer exception error
         contact = " no contact yet";
+        this.userId = userId;
     }
 
     /**
@@ -63,6 +66,7 @@ public class Tweet {
         date        = json.getLong(JSON_DATE);
         //'contact' engaged in overloaded constructor
         contact     = json.getString(JSON_CONTACT);
+        userId      = json.getLong(JSON_USER_ID);
     }
 
     /**
@@ -77,6 +81,7 @@ public class Tweet {
         json.put(JSON_DATE          , date);
         //serialization of contact
         json.put(JSON_CONTACT       , contact);
+        json.put(JSON_USER_ID       , userId);
         return json;
     }
 
@@ -102,6 +107,10 @@ public class Tweet {
         String email = tweetText;
         return email;
 
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
 }
