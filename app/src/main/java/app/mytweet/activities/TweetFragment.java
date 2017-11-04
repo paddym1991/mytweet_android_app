@@ -209,7 +209,9 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
 
             case R.id.menuLogout:   Intent in = new Intent(getActivity(), Welcome.class);
                 //delete created tweet before logging out.
-                portfolio.deleteTweet(tweet);
+                if (tweetText.getText().length() == 0) {
+                    portfolio.deleteTweet(tweet);
+                }
                 //Prevents user from pressing back after logging out.
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(in, 0);
