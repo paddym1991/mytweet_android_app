@@ -236,6 +236,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                     tweet.tweetText = tweetText.getText().toString();
                     IntentHelper.startActivity(getActivity(), TimelineActivity.class);
                     portfolio.saveTweets();
+                    createToastMessage("Message sent").show();
 
                     break;
                 } else {
