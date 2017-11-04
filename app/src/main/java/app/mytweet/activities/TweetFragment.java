@@ -79,6 +79,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     // This field is required to provide us with access to the data intent outside the method onActivityResult
     private Intent data;
 
+
     MyTweetApp app;
 
     @Override
@@ -94,6 +95,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         portfolio = app.portfolio;
         tweet = portfolio.getTweet(tweetId);
 
+        Long loggedInUserId = app.loggedInUser.id;
+        Long tweetUserId = this.tweet.getUserId();
 
     }
 
@@ -185,7 +188,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
             case android.R.id.home:
                 //if textView contains text then navigateUp to parent(timeline), saving tweet to array.
             if (tweetText.getText().length() > 0) {
-                tweet.tweetText = tweetText.getText().toString();
+               // tweet.tweetText = tweetText.getText().toString();
 
                 navigateUp(getActivity());
                 portfolio.deleteTweet(tweet);
@@ -271,6 +274,23 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                                             //This was the reason that a blank tweet was added and saved to the timeline when back button was pressed.
 
         //Long tweetId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_TWEET_ID);
+    }
+
+    /**
+     * Set tweet read only if not the tweeter, and editable if user is the tweeter.
+     */
+    public void onResume() {
+        super.onResume();
+       // User user = app.userStore.getUser(tweet.getUserId());
+
+        // if tweeter's id is not equal to logged in user id and tweetText editor has a tweet in it
+        // the tweetText will be set as read only. If tweeter's id is equal to logged in user id
+        // the tweet will be editable.
+        if (!(this.tweet.getUserId().equals(app.loggedInUser.id))) {
+            if (tweetText.getText().length() > 0) {
+                tweetText.setEnabled(false);
+            }
+        }
     }
 
 
