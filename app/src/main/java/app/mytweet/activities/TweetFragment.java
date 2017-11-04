@@ -41,6 +41,7 @@ import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
 import app.mytweet.models.User;
+import app.mytweet.settings.SettingsActivity;
 
 //importing the helper method for 'up' style navigation
 import static app.helpers.ContactHelper.getContact;
@@ -206,6 +207,10 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 //Prevents user from pressing back after logging out.
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(in, 0);
+                return true;
+
+            case R.id.action_settings:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
 
             default:
