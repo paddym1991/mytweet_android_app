@@ -40,6 +40,7 @@ import app.helpers.IntentHelper;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
+import app.mytweet.models.User;
 
 //importing the helper method for 'up' style navigation
 import static app.helpers.ContactHelper.getContact;
@@ -236,8 +237,9 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 break;
             //event handler for email tweet button
             case R.id.emailTweet :
-                sendEmail(getActivity(), emailAddress,
-                        getString(R.string.tweet_email_subject), tweet.getTweetEmail(getActivity()));        //tweet_email_subject found in 'strings'
+                User user = app.userStore.getUser(tweet.getUserId());
+                //sendEmail(getActivity(), emailAddress, getString(R.string.tweet_email_subject), tweet.getTweetEmail(getActivity()));        //tweet_email_subject found in 'strings'
+                sendEmail(getActivity(), emailAddress, "New Tweet by " + user.firstName + " " + user.lastName, tweet.getTweetEmail(getActivity()));
                 break;
         }
     }
