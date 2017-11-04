@@ -79,7 +79,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         Tweet tweet = ((TweetAdapter) getListAdapter()).getItem(position);
-        Intent i = new Intent(getActivity(), TweetActivity.class);
+        Intent i = new Intent(getActivity(), TweetPagerActivity.class);
         i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet.id);
         startActivityForResult(i, 0);
     }
@@ -89,7 +89,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         Tweet tweet = adapter.getItem(position);
-        IntentHelper.startActivityWithData(getActivity(), TweetActivity.class, "TWEET_ID", tweet.id);
+        IntentHelper.startActivityWithData(getActivity(), TweetPagerActivity.class, "TWEET_ID", tweet.id);
     }
 
     /**
@@ -120,7 +120,7 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
                 Tweet tweet = new Tweet(app.loggedInUser.id);
                 portfolio.addTweet(tweet);
 
-                Intent i = new Intent(getActivity(), TweetActivity.class);
+                Intent i = new Intent(getActivity(), TweetPagerActivity.class);
                 i.putExtra(TweetFragment.EXTRA_TWEET_ID, tweet.id);
                 startActivityForResult(i, 0);
                 return true;
