@@ -29,9 +29,14 @@ public class Login extends AppCompatActivity {
         TextView email = (TextView) findViewById(R.id.loginEmail);
         TextView password = (TextView) findViewById(R.id.loginPassword);
 
+        String loggedInEmail = email.getText().toString();
         if (app.validUser(email.getText().toString(), password.getText().toString())) {
+
+            //set logged in user when sign in is clicked
+            app.setLoggedInUser(loggedInEmail);
             startActivity(new Intent(this, TimelineActivity.class));
         } else {
+
             Toast toast = Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT);
             toast.show();
         }

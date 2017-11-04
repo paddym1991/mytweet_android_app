@@ -29,8 +29,8 @@
     <string name="login_label">Login</string>
     <string name="delete_tweet">Delete Tweet</string>
     <string name="menuLogout">Logout</string>
-    <string name="username_summary">Please enter your user name</string>
-    <string name="username">Username</string>
+    <string name="email_summary">Please enter your email</string>
+    <string name="email">Email</string>
     <string name="password_summary">You may set your password here</string>
     <string name="password">Password</string>
     <string name="nmr_tweets">Configure Downloads</string>
