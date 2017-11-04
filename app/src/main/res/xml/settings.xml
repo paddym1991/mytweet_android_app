@@ -12,6 +12,16 @@
         android:inputType="textPassword"/>
 
     <EditTextPreference
+        android:key="firstName"
+        android:summary="@string/firstName_summary"
+        android:title="@string/settingsFirstName"/>
+
+    <EditTextPreference
+        android:key="lastName"
+        android:summary="@string/lastName_summary"
+        android:title="@string/settingsLastName"/>
+
+    <EditTextPreference
         android:key="nmr_tweets"
         android:summary="@string/nmr_tweets_summary"
         android:title="@string/nmr_tweets"

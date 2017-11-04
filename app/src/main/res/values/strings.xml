@@ -33,6 +33,10 @@
     <string name="email">Email</string>
     <string name="password_summary">You may set your password here</string>
     <string name="password">Password</string>
+    <string name="firstName_summary">Please enter your First Name</string>
+    <string name="settingsFirstName">First Name</string>
+    <string name="lastName_summary">Please enter your Last Name</string>
+    <string name="settingsLastName">Last Name</string>
     <string name="nmr_tweets">Configure Downloads</string>
     <string name="nmr_tweets_summary">How many Tweets to store locally?</string>
     <string name="set_refresh_interval">Refresh</string>
