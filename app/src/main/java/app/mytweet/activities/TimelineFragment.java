@@ -129,6 +129,14 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
 
+            case R.id.action_clearAll:
+
+                for (int j  = tweets.size()  - 1; j >= 0; j--) {
+                    portfolio.deleteTweet(tweets.get(j));
+                    adapter.notifyDataSetChanged();
+                }
+                return true;
+
             case R.id.menuLogout:   Intent in = new Intent(getActivity(), Welcome.class);
                 //Prevents user from pressing back after logging out.
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
