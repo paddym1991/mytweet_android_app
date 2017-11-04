@@ -22,7 +22,7 @@
             android:label="@string/timeline_label" />
 
         <activity
-            android:name="app.mytweet.activities.TweetActivity"
+            android:name="app.mytweet.activities.TweetPagerActivity"
             android:label="@string/tweet_label" >
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="app.mytweet.activities.TimelineActivity"/>
