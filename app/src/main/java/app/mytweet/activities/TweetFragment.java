@@ -70,6 +70,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     private Button selectContactButton;
     //button to trigger email intent
     private Button   emailTweetButton;
+    //text view for counting down characters of tweet
+    private TextView charCounter;
 
     private String emailAddress = "";
     // New field for intent data. This field is initialized in `onActivityResult`.
@@ -90,6 +92,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;
         tweet = portfolio.getTweet(tweetId);
+
+
     }
 
     @Override
@@ -119,6 +123,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         emailTweetButton = (Button)   v.findViewById(R.id.emailTweet);
         selectContactButton = (Button)   v.findViewById(R.id.selectContact);
         tweetButton = (Button) v.findViewById(R.id.tweetButton);
+        charCounter = (TextView) v.findViewById(R.id.charCounter);
 
         tweetText.addTextChangedListener(this);
         //tweetDate.addTextChangedListener(this);       //tweet Date does not change after intitially being set, so no need for a listener
@@ -145,6 +150,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+        int remainingChars = 140 - tweetText.getText().toString().length();
+        charCounter.setText(Integer.toString(remainingChars));
     }
 
     //set tweetText of Tweet object to text entered.
