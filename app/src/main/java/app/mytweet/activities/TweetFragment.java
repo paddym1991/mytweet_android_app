@@ -88,7 +88,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
 
         //Recover the ID passed to us via the intent in TimelineActivity
         // Long tweetId = (Long) getActivity().getIntent().getSerializableExtra("EXTRA_TWEET_ID");
-        Long tweetId = (Long) getActivity().getIntent().getSerializableExtra(EXTRA_TWEET_ID);
+        Long tweetId = (Long)getArguments().getSerializable(EXTRA_TWEET_ID);
 
         app = MyTweetApp.getApp();
         portfolio = app.portfolio;
@@ -103,8 +103,8 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         super.onCreateView(inflater,  parent, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_tweet, parent, false);
 
-        TweetActivity tweetActivity = (TweetActivity)getActivity();
-        tweetActivity.actionBar.setDisplayHomeAsUpEnabled(true);
+       // TweetActivity tweetActivity = (TweetActivity)getActivity();
+       // tweetActivity.actionBar.setDisplayHomeAsUpEnabled(true);
 
         addListeners(v);
         updateControls(tweet);
