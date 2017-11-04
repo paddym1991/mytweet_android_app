@@ -29,6 +29,7 @@ public class MyTweetApp extends Application {
     public UserStore userStore;
     //introduce a field to hold the file name we will use to store the users
     private static final String USER_FILENAME = "users.json";
+    public User loggedInUser;
 
     @Override
     public void onCreate() {
@@ -77,8 +78,8 @@ public class MyTweetApp extends Application {
         return false;
     }
 
-//    public void setLoggedInUser(String email) {
-//        loggedInUser = userStore.getUserByEmail(email);
-//    }
+    public void setLoggedInUser(String email) {
+        loggedInUser = userStore.getUserByEmail(email);
+    }
 
 }
