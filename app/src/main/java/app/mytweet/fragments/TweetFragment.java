@@ -2,7 +2,7 @@
 /**
  * Created by Paddym1991 on 18/10/2017.
  */
-package app.mytweet.activities;
+package app.mytweet.fragments;
 
 import android.Manifest;
 import android.app.Activity;
@@ -37,6 +37,8 @@ import android.widget.TextView;
 import org.pm.mytweet.R;
 
 import app.helpers.IntentHelper;
+import app.mytweet.activities.TimelineActivity;
+import app.mytweet.activities.Welcome;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;

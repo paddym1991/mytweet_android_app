@@ -1,4 +1,4 @@
-package app.mytweet.activities;
+package app.mytweet.fragments;
 
 import android.annotation.SuppressLint;
 
@@ -23,14 +23,16 @@ import org.pm.mytweet.R;
 import java.util.ArrayList;
 
 import app.helpers.IntentHelper;
+import app.mytweet.activities.TweetPagerActivity;
+import app.mytweet.activities.Welcome;
 import app.mytweet.app.MyTweetApp;
+import app.mytweet.fragments.TweetFragment;
 import app.mytweet.models.Portfolio;
 import app.mytweet.models.Tweet;
 import app.mytweet.settings.SettingsActivity;
 
 import android.widget.AbsListView;
 import android.view.ActionMode;
-import android.widget.Toast;
 
 /**
  * Created by Paddym1991 on 18/10/2017.

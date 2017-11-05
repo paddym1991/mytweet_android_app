@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
-import org.pm.mytweet.R;
+import app.mytweet.fragments.SettingsFragment;
 
 /**
  * Created by Paddym1991 on 23/10/2017.
