@@ -317,9 +317,11 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
         super.onResume();
        // User user = app.userStore.getUser(tweet.getUserId());
 
-        // if tweeter's id is not equal to logged in user id and tweetText editor has a tweet in it
-        // the tweetText will be set as read only. If tweeter's id is equal to logged in user id
-        // the tweet will be editable.
+        /*
+          if tweeter's id is not equal to logged in user id and tweetText editor has a tweet in it
+          the tweetText will be set as read only. If tweeter's id is equal to logged in user id
+          the tweet will be editable.
+         */
         if (!(this.tweet.getUserId().equals(app.loggedInUser.id))) {
             if (tweetText.getText().length() > 0) {
                 tweetText.setEnabled(false);

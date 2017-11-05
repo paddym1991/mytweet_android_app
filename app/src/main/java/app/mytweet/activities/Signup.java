@@ -49,6 +49,7 @@ public class Signup extends AppCompatActivity {
             createToastMessage("Empty last name field").show();
         }
 
+        // ensure email field is not empty and a valid email address is entered
         else if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             createToastMessage("Enter a valid email address").show();
         }
