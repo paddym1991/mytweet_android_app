@@ -189,17 +189,18 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 //if textView contains text then navigateUp to parent(timeline), saving tweet to array.
             if (tweetText.getText().length() > 0) {
                 // tweet.tweetText = tweetText.getText().toString();
-                for (Tweet tweet : portfolio.tweets) {
+                for (int i = 0; i < portfolio.tweets.size(); i++) {
+                //for (Tweet tweet : portfolio.tweets) {
                     if (tweet.equals(this.tweet)) {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                         return true;
-//                    } else {
-//                        navigateUp(getActivity());
-//                        portfolio.deleteTweet(tweet);
-//                        createToastMessage("No tweet saved").show();
-//                        return true;
-//                    }
+                    } else {
+                        navigateUp(getActivity());
+                        portfolio.deleteTweet(tweet);
+                        createToastMessage("No tweet saved").show();
+                        return true;
                     }
+
                 }
             }
             else {
@@ -271,6 +272,30 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 break;
         }
     }
+
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        if (tweetText.getText().length() > 0) {
+//            // tweet.tweetText = tweetText.getText().toString();
+//
+//
+//                        portfolio.deleteTweet(this.tweet);
+//                        createToastMessage("No tweet saved").show();
+//
+//                    }
+//
+//
+//
+//        else {
+//            //else if textView is empty then delete this created tweet and navigate to timeline. No new tweet will be visible in timeline.
+//            portfolio.deleteTweet(this.tweet);
+//
+//
+//            createToastMessage("No message entered!").show();
+//
+//        }
+//    }
 
     /**
      * Trigger a save when the user leaves the TweetActivity
