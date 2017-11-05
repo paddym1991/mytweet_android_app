@@ -188,16 +188,17 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
             case android.R.id.home:
                 //if textView contains text then navigateUp to parent(timeline), saving tweet to array.
             if (tweetText.getText().length() > 0) {
-               // tweet.tweetText = tweetText.getText().toString();
-                for(Tweet tweet : portfolio.tweets) {
+                // tweet.tweetText = tweetText.getText().toString();
+                for (Tweet tweet : portfolio.tweets) {
                     if (tweet.equals(this.tweet)) {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                         return true;
-                    } else {
-                        navigateUp(getActivity());
-                        portfolio.deleteTweet(tweet);
-                        createToastMessage("No tweet saved").show();
-                        return true;
+//                    } else {
+//                        navigateUp(getActivity());
+//                        portfolio.deleteTweet(tweet);
+//                        createToastMessage("No tweet saved").show();
+//                        return true;
+//                    }
                     }
                 }
             }
