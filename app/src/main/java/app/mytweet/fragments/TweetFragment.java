@@ -53,10 +53,17 @@ import static app.helpers.IntentHelper.selectContact;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 //import helper for sending an email
 import static app.helpers.ContactHelper.sendEmail;
 
-public class TweetFragment extends Fragment implements TextWatcher, OnClickListener {
+public class  TweetFragment extends Fragment implements TextWatcher, OnClickListener, Callback<List<Tweet>> {
 
     public static   final String  EXTRA_TWEET_ID = "mytweet.TWEET_ID";
     //An ID we will use for the implicit intent
@@ -193,7 +200,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                 // tweet.tweetText = tweetText.getText().toString();
                 for (int i = 0; i < portfolio.tweets.size(); i++) {
                 //for (Tweet tweet : portfolio.tweets) {
-                    if (tweet.equals(this.tweet)) {
+                    if (tweetText.equals(this.tweet)) {
                         startActivity(new Intent(getActivity(), TimelineActivity.class));
                         return true;
                     } else {
@@ -252,6 +259,7 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
                     tweet.tweetText = tweetText.getText().toString();
                     IntentHelper.startActivity(getActivity(), TimelineActivity.class);
                     portfolio.saveTweets();
+
                     createToastMessage("Message sent").show();
 
                     break;
@@ -415,5 +423,20 @@ public class TweetFragment extends Fragment implements TextWatcher, OnClickListe
     // created a helper method for Toast response
     private Toast createToastMessage(String string) {
         return Toast.makeText(app.getApplicationContext(), string, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
+
+        Toast toast = Toast.makeText(getActivity(), "Tweet Tweeted", Toast.LENGTH_SHORT);
+        toast.show();
+       // app.newTweet(response.body());
+    }
+
+    @Override
+    public void onFailure(Call<List<Tweet>> call, Throwable t) {
+
+        Toast toast = Toast.makeText(getActivity(), "Error making tweet", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
