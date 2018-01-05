@@ -11,10 +11,14 @@ import org.pm.mytweet.R;
 
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
-public class Signup extends AppCompatActivity {
+public class Signup extends AppCompatActivity implements Callback<User> {
 
-    MyTweetApp app;
+   private MyTweetApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,8 @@ public class Signup extends AppCompatActivity {
             app.userStore.addUser(user);
             //app.newUser(user);
 
-            startActivity(new Intent(this, Welcome.class));
+            Call<User> call = (Call<User>) app.mytweetService.createUser(user);
+            call.enqueue(this);
         }
     }
 
@@ -76,5 +81,27 @@ public class Signup extends AppCompatActivity {
         return Toast.makeText(app.getApplicationContext(), string, Toast.LENGTH_SHORT);
     }
 
+    /**
+     * we deal with the responses here
+     * @param call
+     * @param response
+     */
+    @Override
+    public void onResponse(Call<User> call, Response<User> response) {
+        app.users.add(response.body());
+        startActivity(new Intent(this, Welcome.class));
+    }
 
+    /**
+     * we deal with the responses here
+     * @param call
+     * @param t
+     */
+    @Override
+    public void onFailure(Call<User> call, Throwable t) {
+        app.mytweetServiceAvailable = false;
+        Toast toast = Toast.makeText(this, "Donation Service Unavailable. Try again later", Toast.LENGTH_LONG);
+        toast.show();
+        startActivity (new Intent(this, Welcome.class));
+    }
 }
