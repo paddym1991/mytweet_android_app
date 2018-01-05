@@ -34,11 +34,18 @@ import app.mytweet.settings.SettingsActivity;
 import android.widget.AbsListView;
 import android.view.ActionMode;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import android.widget.Toast;
+
+import java.util.List;
+
 /**
  * Created by Paddym1991 on 18/10/2017.
  */
 
-public class TimelineFragment extends ListFragment implements OnItemClickListener, AbsListView.MultiChoiceModeListener {
+public class TimelineFragment extends ListFragment implements OnItemClickListener, AbsListView.MultiChoiceModeListener, Callback<List<Tweet>> {
 
     private ArrayList<Tweet> tweets;
     private Portfolio portfolio;
@@ -63,6 +70,9 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
 
         adapter = new TweetAdapter(getActivity(), tweets);
         setListAdapter(adapter);
+
+        Call<List<Tweet>> call = (Call<List<Tweet>>) app.mytweetService.getAllTweets();
+        call.enqueue(this);
     }
 
     @Override
@@ -208,6 +218,20 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResponse(Call<List<Tweet>> call, Response<List<Tweet>> response) {
+
+        adapter.tweets = response.body();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onFailure(Call<List<Tweet>> call, Throwable t) {
+
+        Toast toast = Toast.makeText(getActivity(), "Error retrieving donations", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
     /* ************ MultiChoiceModeListener methods (end) *********** */
 
 
@@ -217,11 +241,13 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
     class TweetAdapter extends ArrayAdapter<Tweet> {
 
         private Context context;
+        public List<Tweet> tweets;
 
         public TweetAdapter(Context context, ArrayList<Tweet> tweets) {
 
             super(context, 0, tweets);
             this.context = context;
+            this.tweets = tweets;
         }
 
         @SuppressLint("InflateParams")
@@ -244,6 +270,11 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
 
             return convertView;
         }
+
+        @Override
+        public int getCount() {
+            return tweets.size();
+            }
     }
 }
 
