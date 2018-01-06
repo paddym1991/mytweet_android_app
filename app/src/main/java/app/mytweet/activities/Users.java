@@ -93,6 +93,7 @@ public class Users extends AppCompatActivity implements Callback<List<User>> {
 class UserAdapter extends ArrayAdapter<User> {
     private Context context;
     public List<User> users = new ArrayList<User>();
+    private MyTweetApp app;
 
     public UserAdapter(Context context, List<User> users) {
         super(context, R.layout.users_row_layout, users);
@@ -108,6 +109,15 @@ class UserAdapter extends ArrayAdapter<User> {
         User user = users.get(position);
         TextView userName = (TextView) view.findViewById(R.id.userName);
         userName.setText(user.firstName + " " + user.lastName);
+
+        TextView button = (TextView) view.findViewById(R.id.follow);
+        if(app.loggedInUser.following != null) {
+            if(app.loggedInUser.following.contains(user.id)) {
+                button.setText("Unfollow");
+                } else {
+                button.setText("Follow");
+                }
+            }
 
         return view;
     }

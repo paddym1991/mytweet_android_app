@@ -3,6 +3,8 @@ package app.mytweet.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import java.util.Random;
 
 /**
@@ -16,6 +18,8 @@ import java.util.Random;
     public String lastName;
     public String email;
     public String password;
+    public List<String> following;
+    public List<String> followers;
 
     private static final String JSON_ID  = "id";
     private static final String JSON_FIRST_NAME   = "firstName";
