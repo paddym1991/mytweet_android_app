@@ -26,10 +26,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.widget.AdapterView;
+
 import static app.helpers.IntentHelper.navigateUp;
 
 
-public class Users extends AppCompatActivity implements Callback<List<User>> {
+public class Users extends AppCompatActivity implements Callback<List<User>>, AdapterView.OnItemClickListener {
 
     private ListView listView;
     private MyTweetApp app;
@@ -40,13 +42,17 @@ public class Users extends AppCompatActivity implements Callback<List<User>> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         app = (MyTweetApp) getApplication();
 
         listView = (ListView) findViewById(R.id.usersList);
         adapter = new UserAdapter(this, app.users);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
+        //follow = (Button) findViewById(R.id.follow);
+        //follow.setOnClickListener(this);
 
         Call<List<User>> call = (Call<List<User>>) app.mytweetService.getAllUsers();
         call.enqueue(this);
@@ -78,6 +84,14 @@ public class Users extends AppCompatActivity implements Callback<List<User>> {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Call<List<User>> call1 = (Call<List<User>>) app.mytweetService.getAllUsers();
+        call1.enqueue(this);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
         adapter.users = response.body();
         adapter.notifyDataSetChanged();
@@ -87,6 +101,50 @@ public class Users extends AppCompatActivity implements Callback<List<User>> {
     public void onFailure(Call<List<User>> call, Throwable t) {
         Toast toast = Toast.makeText(this, "Error retrieving users", Toast.LENGTH_LONG);
         toast.show();
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        final User user = adapter.getItem(position);
+        Long userId = user.id;
+        if (app.loggedInUser.following != null) {
+            if (app.loggedInUser.following.contains(userId)) {
+                Call<User> call1 = (Call<User>) app.mytweetService.unfollow(app.loggedInUser.id, userId.toString());
+                call1.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Toast toast = Toast.makeText(Users.this, "Unfollowed " + user.firstName + " " + user.lastName, Toast.LENGTH_LONG);
+                        toast.show();
+                        app.loggedInUser = response.body();
+                        startActivity(new Intent(Users.this, TimelineActivity.class));
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast toast = Toast.makeText(Users.this, "Error unfollowing " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            } else if (!app.loggedInUser.following.contains(userId)) {
+                Call<User> call1 = (Call<User>) app.mytweetService.follow(app.loggedInUser.id, userId.toString());
+                call1.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Toast toast = Toast.makeText(Users.this, "Started following " + user.firstName + " " + user.lastName, Toast.LENGTH_LONG);
+                        toast.show();
+                        app.loggedInUser = response.body();
+                        startActivity(new Intent(Users.this, TimelineActivity.class));
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast toast = Toast.makeText(Users.this, "Error following " + user.firstName + " " + user.lastName, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            }
+        }
     }
 }
 

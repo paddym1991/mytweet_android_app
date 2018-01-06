@@ -22,17 +22,26 @@ public interface MyTweetService
     Call<List<User>> getAllUsers();
 
     @GET("/api/users/{id}")
-    Call<User> getUser(@Path("id") String id);
+    Call<User> getUser(@Path("id") Long id);
 
     @POST("/api/users")
     Call<User> createUser(@Body User user);
+
+    @POST("/api/users/authenticate")
+    Call<User> authenticate(@Body User user);
 
     @GET("/api/tweets")
     Call<List<Tweet>> getAllTweets();
 
     @GET("/api/tweets/{id}")
-    Call<Tweet> deleteTweet(@Path("id") String id);
+    Call<Tweet> deleteTweet(@Path("id") Long id);
 
     @POST("/api/tweets")
     Call<Tweet> createTweet(@Body Tweet tweet);
+
+    @POST("/api/users/{id}/follow")
+    Call<User> follow(@Path("id") Long id, @Body String user);
+
+    @POST("/api/users/{id}/unfollow")
+    Call<User> unfollow(@Path("id") Long id, @Body String user);
 }

@@ -11,6 +11,11 @@ import org.pm.mytweet.R;
 
 import app.mytweet.app.MyTweetApp;
 
+import app.mytweet.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Login extends AppCompatActivity {
 
     @Override
@@ -24,7 +29,7 @@ public class Login extends AppCompatActivity {
      * @param view
      */
     public void signinButtonPressed (View view) {
-        MyTweetApp app = MyTweetApp.getApp();
+        final MyTweetApp app = MyTweetApp.getApp();
 
         TextView email = (TextView) findViewById(R.id.loginEmail);
         TextView password = (TextView) findViewById(R.id.loginPassword);
@@ -32,15 +37,40 @@ public class Login extends AppCompatActivity {
         String loggedInEmail = email.getText().toString();
         String loggedInPassword = password.getText().toString();
 
-        if (app.validUser(loggedInEmail, loggedInPassword)) {
+//        if (app.validUser(loggedInEmail, loggedInPassword)) {
+//
+//            //set logged in user when sign in is clicked
+//            app.setLoggedInUser(loggedInEmail);
+//            startActivity(new Intent(this, TimelineActivity.class));
+//        } else {
+//
+//            Toast toast = Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT);
+//            toast.show();
+//        }
 
-            //set logged in user when sign in is clicked
-            app.setLoggedInUser(loggedInEmail);
-            startActivity(new Intent(this, TimelineActivity.class));
-        } else {
+        User user = new User(null, null, email.getText().toString(), password.getText().toString());
 
-            Toast toast = Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        Call<User> call = (Call<User>) app.mytweetService.authenticate(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                // Currently logs in a User but issue with
+                // java.lang.NullPointerException: Attempt to read from field 'java.lang.String coady.mytweetapp.model.User.email' on a null object reference
+                // when user enters correct email but wrong password
+                if (app.validUser(user.email, user.password)) {
+                    startActivity (new Intent(Login.this, TweetPagerActivity.class));
+                } else {
+                    Toast toast = Toast.makeText(Login.this, "Invalid Credentials 1", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast toast = Toast.makeText(Login.this, "Invalid Credentials 2", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 }
