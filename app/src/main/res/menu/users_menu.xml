@@ -2,19 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/menu_item_new_tweet"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/new_tweet"
+        app:showAsAction="ifRoom|withText"/>
+
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="@string/settings"/>
+
     <item
         android:id="@+id/menuLogout"
         android:orderInCategory="100"
         android:title="@string/menuLogout"/>
-
-    <item
-        android:id="@+id/user"
-        android:orderInCategory="100"
-        android:title="@string/user" />
 
 </menu>

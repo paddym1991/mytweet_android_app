@@ -42,4 +42,7 @@
     <string name="set_refresh_interval">Refresh</string>
     <string name="set_refresh_interval_summary">Frequency of cloud updates (minutes)</string>
     <string name="clearAll">Clear All</string>
+    <string name="users">MyTweet Users</string>
+    <string name="follow">Follow</string>
+    <string name="user">Users</string>
 </resources>

@@ -97,13 +97,13 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
 
     void serviceUnavailableMessage()
     {
-        Toast toast = Toast.makeText(this, "Donation Service Unavailable. Try again later", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "MyTweet Service Unavailable. Try again later", Toast.LENGTH_LONG);
         toast.show();
     }
 
     void serviceAvailableMessage()
     {
-        Toast toast = Toast.makeText(this, "Donation Contacted Successfully", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "MyTweet Contacted Successfully", Toast.LENGTH_LONG);
         toast.show();
     }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:gravity="left"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="@string/follow"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/GraniteGray"
+        android:textColor="@color/GhostWhite"
+        android:layout_alignParentRight="true"
+        android:id="@+id/follow"
+        android:layout_gravity="right"
+        android:focusable="false" />
+
+</RelativeLayout>
