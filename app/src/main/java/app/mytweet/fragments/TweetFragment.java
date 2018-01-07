@@ -37,6 +37,7 @@ import android.widget.TextView;
 import org.pm.mytweet.R;
 
 import app.helpers.IntentHelper;
+import app.mytweet.activities.PersonalTimeline;
 import app.mytweet.activities.TimelineActivity;
 import app.mytweet.activities.UserFollowsTimeline;
 import app.mytweet.activities.Users;
@@ -242,6 +243,10 @@ public class  TweetFragment extends Fragment implements TextWatcher, OnClickList
 
             case R.id.userFollowsTimeline:
                 startActivity(new Intent(getActivity(), UserFollowsTimeline.class));
+                return true;
+
+            case R.id.personalTimeline:
+                startActivity(new Intent(getActivity(), PersonalTimeline.class));
                 return true;
 
             case R.id.action_settings:

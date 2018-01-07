@@ -73,6 +73,12 @@ public class Users extends AppCompatActivity implements Callback<List<User>>, Ad
             case R.id.timeline:
                 startActivity(new Intent(this, TimelineActivity.class));
                 break;
+            case R.id.userFollowsTimeline:
+                startActivity(new Intent(this, UserFollowsTimeline.class));
+                return true;
+            case R.id.personalTimeline:
+                startActivity(new Intent(this, PersonalTimeline.class));
+                return true;
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;

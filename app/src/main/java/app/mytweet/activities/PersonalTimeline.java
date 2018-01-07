@@ -26,13 +26,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static app.helpers.IntentHelper.navigateUp;
 
-public class UserFollowsTimeline extends AppCompatActivity implements Callback<List<Tweet>> {
+public class PersonalTimeline extends AppCompatActivity implements Callback<List<Tweet>> {
 
     private ListView listView;
     private MyTweetApp app;
-    private UserFollowsTweetAdapter adapter;
+    private MyTimelineAdapter adapter;
     private String selectedItem;
     private final Context context = this;
 
@@ -44,16 +43,16 @@ public class UserFollowsTimeline extends AppCompatActivity implements Callback<L
         app = (MyTweetApp) getApplication();
 
         listView = (ListView) findViewById(R.id.timeline);
-        adapter = new UserFollowsTweetAdapter(this, app.tweets);
+        adapter = new MyTimelineAdapter(this, app.tweets);
         listView.setAdapter(adapter);
 
-        Call<List<Tweet>> call = (Call<List<Tweet>>) app.mytweetService.getUserFollowsTimeline(app.loggedInUser.id);
+        Call<List<Tweet>> call = (Call<List<Tweet>>) app.mytweetService.personalTweets(app.loggedInUser.id);
         call.enqueue(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_follows_timeline_menu, menu);
+        getMenuInflater().inflate(R.menu.personal_timeline_menu, menu);
         return true;
     }
     @Override
@@ -64,6 +63,9 @@ public class UserFollowsTimeline extends AppCompatActivity implements Callback<L
                 break;
             case R.id.timeline:
                 startActivity(new Intent(this, TimelineActivity.class));
+                break;
+            case R.id.userFollowsTimeline:
+                startActivity(new Intent(this, UserFollowsTimeline.class));
                 break;
             case R.id.user:
                 startActivity(new Intent(this, Users.class));
@@ -91,11 +93,11 @@ public class UserFollowsTimeline extends AppCompatActivity implements Callback<L
     }
 }
 
-class UserFollowsTweetAdapter extends ArrayAdapter<Tweet> {
+class MyTimelineAdapter extends ArrayAdapter<Tweet> {
     private Context context;
     public List<Tweet> tweets = new ArrayList<Tweet>();
 
-    public UserFollowsTweetAdapter(Context context, List<Tweet> tweets) {
+    public MyTimelineAdapter(Context context, List<Tweet> tweets) {
         super(context, R.layout.users_row_layout, tweets);
         this.context = context;
         this.tweets = tweets;
@@ -111,7 +113,7 @@ class UserFollowsTweetAdapter extends ArrayAdapter<Tweet> {
         TextView tweetDate = (TextView) view.findViewById(R.id.timeline_item_tweetDate);
 
         tweetText.setText(tweet.tweetText);
-      //  tweetDate.setText(tweet.date);
+        //tweetDate.setText(tweet.date);
 
         return view;
     }

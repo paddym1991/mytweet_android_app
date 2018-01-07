@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_item_new_tweet"
+        android:title="@string/new_tweet"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/user"
+        android:orderInCategory="100"
+        android:title="@string/user" />
+
+    <item
+        android:id="@+id/personalTimeline"
+        android:orderInCategory="100"
+        android:title="@string/personalTimeline" />
+
+    <item android:id="@+id/action_Settings"
+        android:title="@string/settings"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/menuLogout"
+        android:orderInCategory="100"
+        android:title="@string/menuLogout"/>
+
+</menu>

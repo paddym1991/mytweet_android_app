@@ -46,4 +46,5 @@
     <string name="follow">Follow</string>
     <string name="user">Users</string>
     <string name="userFollowsTimeline">User Following Timeline</string>
+    <string name="personalTimeline">Personal Timeline</string>
 </resources>

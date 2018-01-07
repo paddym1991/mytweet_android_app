@@ -16,6 +16,12 @@
         android:id="@+id/user"
         android:orderInCategory="100"
         android:title="@string/user" />
+
+    <item
+        android:id="@+id/personalTimeline"
+        android:orderInCategory="100"
+        android:title="@string/personalTimeline" />
+
     <item
         android:id="@+id/userFollowsTimeline"
         android:orderInCategory="100"
