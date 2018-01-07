@@ -34,7 +34,7 @@ public interface MyTweetService
     Call<List<Tweet>> getAllTweets();
 
     @GET("/api/tweets/{id}")
-    Call<Tweet> deleteTweet(@Path("id") Long id);
+    Call<Tweet> deleteTweet(@Path("id") String id);
 
     @POST("/api/tweets")
     Call<Tweet> createTweet(@Body Tweet tweet);
@@ -44,4 +44,7 @@ public interface MyTweetService
 
     @POST("/api/users/{id}/unfollow")
     Call<User> unfollow(@Path("id") Long id, @Body String user);
+
+    @GET("/api/users/{id}/userfollowsTimeline")
+    Call<List<Tweet>> getUserFollowsTimeline(@Path("id") Long id);
 }

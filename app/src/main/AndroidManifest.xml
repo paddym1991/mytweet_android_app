@@ -59,6 +59,15 @@
         </activity>
 
         <activity
+            android:name="app.mytweet.activities.Users"
+            android:label="@string/users">
+        </activity>
+
+        <activity
+            android:name="app.mytweet.activities.UserFollowsTimeline"
+            android:label="@string/userFollowsTimeline"></activity>
+
+        <activity
             android:name="app.mytweet.settings.SettingsActivity"
             android:label="@string/settings">
             <meta-data

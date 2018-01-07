@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 import app.helpers.IntentHelper;
 import app.mytweet.activities.TweetPagerActivity;
+import app.mytweet.activities.UserFollowsTimeline;
+import app.mytweet.activities.Users;
 import app.mytweet.activities.Welcome;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.fragments.TweetFragment;
@@ -139,6 +141,14 @@ public class TimelineFragment extends ListFragment implements OnItemClickListene
 
             case R.id.action_settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+
+            case R.id.user:
+                startActivity(new Intent(getActivity(), Users.class));
+                return true;
+
+            case R.id.userFollowsTimeline:
+                startActivity(new Intent(getActivity(), UserFollowsTimeline.class));
                 return true;
 
             case R.id.action_clearAll:

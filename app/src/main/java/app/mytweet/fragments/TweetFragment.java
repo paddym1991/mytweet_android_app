@@ -38,6 +38,8 @@ import org.pm.mytweet.R;
 
 import app.helpers.IntentHelper;
 import app.mytweet.activities.TimelineActivity;
+import app.mytweet.activities.UserFollowsTimeline;
+import app.mytweet.activities.Users;
 import app.mytweet.activities.Welcome;
 import app.mytweet.app.MyTweetApp;
 import app.mytweet.models.Portfolio;
@@ -232,6 +234,14 @@ public class  TweetFragment extends Fragment implements TextWatcher, OnClickList
                 //Prevents user from pressing back after logging out.
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivityForResult(in, 0);
+                return true;
+
+            case R.id.user:
+                startActivity(new Intent(getActivity(), Users.class));
+                return true;
+
+            case R.id.userFollowsTimeline:
+                startActivity(new Intent(getActivity(), UserFollowsTimeline.class));
                 return true;
 
             case R.id.action_settings:
