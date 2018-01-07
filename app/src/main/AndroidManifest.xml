@@ -64,6 +64,10 @@
         </activity>
 
         <activity
+            android:name="app.mytweet.activities.PersonalTimeline"
+            android:label="@string/personalTimeline"></activity>
+
+        <activity
             android:name="app.mytweet.activities.UserFollowsTimeline"
             android:label="@string/userFollowsTimeline"></activity>
 
