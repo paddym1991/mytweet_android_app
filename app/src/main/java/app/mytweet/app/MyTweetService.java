@@ -11,6 +11,7 @@ package app.mytweet.app;
         import retrofit2.http.DELETE;
         import retrofit2.http.GET;
         import retrofit2.http.POST;
+        import retrofit2.http.PUT;
         import retrofit2.http.Path;
 
 /**
@@ -30,6 +31,9 @@ public interface MyTweetService
     @POST("/api/users/authenticate")
     Call<User> authenticate(@Body User user);
 
+    @PUT("/api/users")
+    Call<User> updateUser(@Body User user);
+
     @GET("/api/tweets")
     Call<List<Tweet>> getAllTweets();
 
@@ -47,4 +51,7 @@ public interface MyTweetService
 
     @GET("/api/users/{id}/userfollowsTimeline")
     Call<List<Tweet>> getUserFollowsTimeline(@Path("id") Long id);
+
+    @GET("/api/users/{id}/tweets")
+    Call<List<Tweet>> personalTweets(@Path("id") Long id);
 }

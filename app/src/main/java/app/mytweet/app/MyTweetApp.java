@@ -21,11 +21,17 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import app.mytweet.models.Token;
+
 /**
  * Created by Paddym1991 on 09/10/2017.
  */
 
-public class MyTweetApp extends Application {
+public class MyTweetApp extends Application implements Callback<Token> {
 
     public Portfolio portfolio;
     //introduce a field to hold the file name we will use to store the portfolio
@@ -116,4 +122,13 @@ public class MyTweetApp extends Application {
     }
 
 
+    @Override
+    public void onResponse(Call<Token> call, Response<Token> response) {
+
+    }
+
+    @Override
+    public void onFailure(Call<Token> call, Throwable t) {
+
+    }
 }

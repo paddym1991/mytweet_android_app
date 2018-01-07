@@ -41,8 +41,8 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
     {
         super.onResume();
         app.loggedInUser = null;
-        Call<List<User>> call1 = (Call<List<User>>) app.mytweetService.getAllUsers();
-        call1.enqueue(this);
+        Call<List<User>> call = (Call<List<User>>) app.mytweetService.getAllUsers();
+        call.enqueue(this);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
         serviceUnavailableMessage();
     }
 
-    public void loginButtonPressed (View view)
+    public void signinButtonPressed (View view)
     {
         if (app.mytweetServiceAvailable)
         {
@@ -83,7 +83,7 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
         }
     }
 
-    public void signupButtonPressed (View view)
+    public void registerButtonPressed (View view)
     {
         if (app.mytweetServiceAvailable)
         {

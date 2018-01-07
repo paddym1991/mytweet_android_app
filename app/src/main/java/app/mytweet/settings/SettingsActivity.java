@@ -6,6 +6,8 @@ import android.view.Menu;
 
 import app.mytweet.fragments.SettingsFragment;
 
+import app.mytweet.activities.Users;
+
 /**
  * Created by Paddym1991 on 23/10/2017.
  */
