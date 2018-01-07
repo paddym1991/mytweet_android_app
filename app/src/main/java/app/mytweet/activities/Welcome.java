@@ -71,7 +71,7 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
         serviceUnavailableMessage();
     }
 
-    public void signinButtonPressed (View view)
+    public void loginButtonPressed (View view)
     {
         if (app.mytweetServiceAvailable)
         {
@@ -83,7 +83,7 @@ public class Welcome extends AppCompatActivity implements Callback<List<User>> {
         }
     }
 
-    public void registerButtonPressed (View view)
+    public void signupButtonPressed (View view)
     {
         if (app.mytweetServiceAvailable)
         {

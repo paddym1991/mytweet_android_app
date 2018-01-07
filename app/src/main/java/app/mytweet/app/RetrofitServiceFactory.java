@@ -12,7 +12,9 @@ import retrofit2.Retrofit.Builder;
 
 public class RetrofitServiceFactory
 {
-    public static final String API_BASE_URL = "http://10.0.2.2:4000";
+    //public static final String API_BASE_URL = "http://10.0.2.2:4000";
+    public static final String API_BASE_URL = "https://vast-mountain-21779.herokuapp.com/";
+
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

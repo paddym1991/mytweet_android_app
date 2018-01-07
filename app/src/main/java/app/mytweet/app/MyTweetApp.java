@@ -50,8 +50,10 @@ public class MyTweetApp extends Application implements Callback<Token> {
     public MyTweetService mytweetService;
     public boolean         mytweetServiceAvailable = false;
     // public String          service_url  = "http://10.0.2.2:9000";   // Standard Emulator IP Address
-    public String          service_url  = "http://10.8.89.59:4000";   // Standard Emulator IP Address
+    //public String          service_url  = "http://10.8.89.59:4000";   // Standard Emulator IP Address
     //public String          service_url  = "http://10.0.2.2:4000";   // Standard Emulator IP Address : use this one when app is secured
+    public String          service_url  = "https://vast-mountain-21779.herokuapp.com/";
+
 
     @Override
     public void onCreate() {
